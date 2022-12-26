@@ -1,0 +1,8 @@
+<td>@item.CreatedAt</td>
+<td>@item.Description</td>
+<td><input type="checkbox" @bind="item.Done" />@item.Done</td>
+
+
+@code {
+    [Parameter] public Tarefa item { get; set; }
+}
