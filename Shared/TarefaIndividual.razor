@@ -1,3 +1,8 @@
+<td>
+    <button @onclick="@(() => RemoverTarefa.InvokeAsync(item))" class="btn btn-danger">
+        <i class="oi oi-trash"></i>
+    </button>
+</td>
 <td>@item.CreatedAt</td>
 <td>@item.Description</td>
 <td><input type="checkbox" @bind="item.Done" />@item.Done</td>
@@ -5,4 +10,6 @@
 
 @code {
     [Parameter] public Tarefa item { get; set; }
+    //passagem de um evento como parametro
+    [Parameter] public EventCallback<Tarefa> RemoverTarefa { get; set; }
 }
