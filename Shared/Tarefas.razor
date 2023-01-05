@@ -1,11 +1,15 @@
 <h1>@Titulo</h1>
 @if (tarefas == null)
 {
-    <Alerta Mensagem="Carregando" />
+    <Alerta Mensagem="Carregando">
+        <span style="color:blue">Carregando tarefas...</span>
+    </Alerta>
 }
 else if (!tarefas.Any())
 {
-    <Alerta Mensagem="Ainda não existem tarefas" />
+    <Alerta>
+       
+    </Alerta>
 }
 else
 {
