@@ -1,0 +1,43 @@
+﻿@typeparam Titem
+
+
+@if (ListaItem == null)
+{
+    if (Carregando == null)
+    {
+        <img src="https://media2.giphy.com/media/8L0Pky6C83SzkzU55a/200w.gif?cid=6c09b952xy1rrfu7iihm328m8kflnxg4b32kth2oteajz5ks&rid=200w.gif&ct=g">
+        <text>Carregando...</text>
+    }
+    else
+    {
+        @Carregando
+    }
+}
+else if (!ListaItem.Any())
+{
+    if(SemRegistro == null)
+    {
+       <img src="https://media2.giphy.com/media/8L0Pky6C83SzkzU55a/200w.gif?cid=6c09b952xy1rrfu7iihm328m8kflnxg4b32kth2oteajz5ks&rid=200w.gif&ct=g">
+        <text>Não existem tarefas...</text>
+    }
+    else
+    {
+        @SemRegistro
+    }
+}
+else
+{
+    foreach(var elemento in ListaItem)
+    {
+        @Lista(elemento)
+    }
+}
+
+@code {
+    [Parameter] public RenderFragment Carregando { get; set; }
+    [Parameter] public RenderFragment SemRegistro { get; set; }
+
+    [Parameter] public List<Titem> ListaItem { get; set; }
+    [Parameter] public RenderFragment<Titem> Lista { get; set; }
+}
+
