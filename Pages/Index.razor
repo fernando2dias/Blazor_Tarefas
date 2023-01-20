@@ -1,15 +1,13 @@
 ﻿@page "/"
-@inject HttpClient http
+@inject IRepository repository
 
 <h1>Tarefas</h1>
 <Tarefas tarefas="GetTarefas()" Titulo="Lista de Tarefas" />
 
 @code {
     List<Tarefa> tarefas = new List<Tarefa>();
-    protected override async Task OnInitializedAsync()
-    {
-        tarefas = await http.GetFromJsonAsync<List<Tarefa>>("dados/tarefas.json");
-    }
+    
+    protected override void OnInitialized() => tarefas = repository.ObterTarefas();
 
     private List<Tarefa> GetTarefas()
     {
