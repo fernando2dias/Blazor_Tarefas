@@ -1,3 +1,4 @@
+@inject IJSRuntime js;
 <h1>@Titulo</h1>
 
 
@@ -61,11 +62,19 @@
         }
     }
 
-    private void RemoveTarefa(Tarefa tarefa)
+    private async Task RemoveTarefa(Tarefa tarefa)
     {
-        confirmacao.Exibir();
-        tarefaRemover = tarefa;
-        //  tarefas.Remove(tarefas.First(x => x.Id == tarefa.Id));
+        // confirmacao.Exibir();
+        // tarefaRemover = tarefa;
+        var res = await js.InvokeAsync<bool>("confirm", "Excluir tarefa?");
+
+        if (res)
+        {
+            tarefas.Remove(tarefa);
+            // await js.InvokeVoidAsync("alert", "Tarefa excluida com sucesso");
+            await js.InvokeAsync<object>("MostraAlerta", "Ok, tarefa excluida!");
+        }
+
     }
 
 
