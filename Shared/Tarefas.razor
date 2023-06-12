@@ -21,6 +21,11 @@
         </tbody>
     </table>
 
+    <DialogConfirm @ref="confirmacao" onCancela="CancelaConfirmacao" onConfirma="RemoverTarefaConfirmacao"> 
+        <div> Deseja Excluir esta tarefa?</div>
+
+    </DialogConfirm>
+
 
 @if (tarefas != null)
 {
@@ -36,6 +41,10 @@
     [Parameter] public string Titulo { get; set; }
 
     private string novaTarefa = "";
+
+    DialogConfirm confirmacao;
+
+    Tarefa tarefaRemover;
 
 
     private void AdicionarNovaTarefa()
@@ -54,6 +63,23 @@
 
     private void RemoveTarefa(Tarefa tarefa)
     {
-        tarefas.Remove(tarefas.First(x => x.Id == tarefa.Id));
+        confirmacao.Exibir();
+        tarefaRemover = tarefa;
+        //  tarefas.Remove(tarefas.First(x => x.Id == tarefa.Id));
     }
+
+
+    void RemoverTarefaConfirmacao()
+    {
+        tarefas.Remove(tarefaRemover);
+        tarefaRemover = null;
+        confirmacao.Ocultar();
+    }
+
+    void CancelaConfirmacao()
+    {
+        confirmacao.Ocultar();
+        tarefaRemover = null;
+    }
+
 }
